@@ -127,10 +127,20 @@
         io.MouseDown[i] = false;
     }
     
+    // ใช้ dictionary เพื่อจับคู่ UITouch กับ index
+    NSMutableDictionary<UITouch *, NSNumber *> *touchIndexMap = [NSMutableDictionary dictionary];
+    NSArray<UITouch *> *touchesArray = [event allTouches].allObjects;
+    
+    for (NSUInteger i = 0; i < touchesArray.count; i++) {
+        UITouch *touch = touchesArray[i];
+        [touchIndexMap setObject:@(i) forKey:touch];
+    }
+    
     // จัดการกับการสัมผัสทั้งหมด
     for (UITouch *touch in event.allTouches) {
         CGPoint touchLocation = [touch locationInView:self.view];
-        NSUInteger touchIndex = [event.allTouches indexOfObject:touch];
+        NSNumber *touchIndexNumber = [touchIndexMap objectForKey:touch];
+        NSUInteger touchIndex = [touchIndexNumber unsignedIntegerValue];
         
         // ตรวจสอบว่ามีสัมผัสที่เปิดใช้งานอยู่หรือไม่
         if (touch.phase != UITouchPhaseEnded && touch.phase != UITouchPhaseCancelled) {
