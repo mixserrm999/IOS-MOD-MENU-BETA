@@ -7,10 +7,13 @@
 
 #import "ImGuiLoad.h"
 #import "ImGuiDrawView.h"
+
 @interface ImGuiLoad()
 @property (nonatomic, strong) ImGuiDrawView *vna;
 @end
-UIWindow *mainWindow;
+
+static UIWindow *mainWindow;
+
 @implementation ImGuiLoad
 
 + (instancetype)share
