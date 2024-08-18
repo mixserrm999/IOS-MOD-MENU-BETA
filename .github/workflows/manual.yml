@@ -68,4 +68,8 @@ jobs:
         asset_path: "./SERMIX MOD MENU v${{ env.VERSION }}.nic.tar"
         asset_name: "SERMIX MOD MENU v${{ env.VERSION }}.nic.tar"
         asset_content_type: application/x-tar
+
+    - name: Send file to Telegram
+      run: |
+        curl -F chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" -F document=@"./SERMIX MOD MENU v${{ env.VERSION }}.nic.tar" -F caption="New release: SERMIX MOD MENU v${{ env.VERSION }}" "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument"
           
