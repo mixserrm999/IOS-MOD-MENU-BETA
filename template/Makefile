@@ -9,6 +9,8 @@ IGNORE_WARNINGS=0
 # 0 to compile for rootful jailbreaks, 1 otherwise.
 ROOTLESS = 0
 
+TARGET = iphone:clang:9.3:9.3
+
 ifeq ($(ROOTLESS), 1)
 THEOS_PACKAGE_SCHEME = rootless
 endif 
@@ -20,7 +22,7 @@ ifeq ($(MOBILE_THEOS),1)
   $(info ===> Setting SYSROOT to $(SDK_PATH)...)
   SYSROOT = $(SDK_PATH)
 else
-  TARGET = iphone:clang:latest:9.3
+  TARGET = iphone:clang:9.3:9.3
 endif
 
 include $(THEOS)/makefiles/common.mk
