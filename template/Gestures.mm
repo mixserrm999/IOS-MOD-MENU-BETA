@@ -65,24 +65,27 @@ return self;
 
 #pragma mark - Interaction
 
-- (void)updateIOWithTouchEvent:(UIEvent *)event
-{
-    UITouch *anyTouch = event.allTouches.anyObject;
-    CGPoint touchLocation = [anyTouch locationInView:self.view];
+- (void)updateIOWithTouchEvent:(UIEvent *)event {
     ImGuiIO &io = ImGui::GetIO();
-    io.MousePos = ImVec2(touchLocation.x, touchLocation.y);
-
-    BOOL hasActiveTouch = NO;
-    for (UITouch *touch in event.allTouches)
-    {
-        if (touch.phase != UITouchPhaseEnded && touch.phase != UITouchPhaseCancelled)
-        {
-            hasActiveTouch = YES;
-            break;
+    
+    // ล้างสถานะการสัมผัสทั้งหมด
+    for (int i = 0; i < IM_ARRAYSIZE(io.MouseDown); i++) {
+        io.MouseDown[i] = false;
+    }
+    
+    // จัดการกับการสัมผัสทั้งหมด
+    for (UITouch *touch in event.allTouches) {
+        CGPoint touchLocation = [touch locationInView:self.view];
+        NSUInteger touchIndex = [event.allTouches indexOfObject:touch];
+        
+        // ตรวจสอบว่ามีสัมผัสที่เปิดใช้งานอยู่หรือไม่
+        if (touch.phase != UITouchPhaseEnded && touch.phase != UITouchPhaseCancelled) {
+            io.MousePos = ImVec2(touchLocation.x, touchLocation.y);
+            io.MouseDown[touchIndex] = YES; // อัพเดทสถานะการสัมผัส
         }
     }
-    io.MouseDown[0] = hasActiveTouch;
 }
+
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
