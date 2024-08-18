@@ -1,15 +1,15 @@
-// Require standard library
+// Require standard library.
 #import <Foundation/Foundation.h>
 #import <Metal/Metal.h>
 #import <MetalKit/MetalKit.h>
-// Imgui library
+// Imgui library.
 #import "Esp/CaptainHook.h"
 #import "Esp/ImGuiDrawView.h"
 #import "IMGUI/Honkai.h"
 #import "IMGUI/imgui.h"
 #import "IMGUI/imgui_impl_metal.h"
 #import "IMGUI/theme.h"
-// Patch library
+// Patch library.
 #import "5Toubun/NakanoIchika.h"
 #import "5Toubun/NakanoItsuki.h"
 #import "5Toubun/NakanoMiku.h"

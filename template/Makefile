@@ -6,7 +6,7 @@ FINALPACKAGE = 1
 FOR_RELEASE = 1
 #THEOS_PACKAGE_SCHEME = rootless
 IGNORE_WARNINGS=0
-# 0 to compile for rootful jailbreaks, 1 otherwise.
+# 0 to compile for rootful jailbreaks, 1 otherwise....
 ROOTLESS = 0
 
 TARGET = iphone:clang:9.3:9.3
