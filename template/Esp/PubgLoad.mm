@@ -21,7 +21,7 @@
 
 static PubgLoad *extraInfo;
 
-static UIWindow *mainWindow;
+UIWindow *mainWindow;
 
 
 + (void)load

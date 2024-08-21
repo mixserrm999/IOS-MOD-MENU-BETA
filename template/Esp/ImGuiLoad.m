@@ -13,7 +13,7 @@
 @property (nonatomic, strong) ImGuiDrawView *vna;
 @end
 
-static UIWindow *mainWindow;
+UIWindow *MainWindow;
 
 @implementation ImGuiLoad
 
