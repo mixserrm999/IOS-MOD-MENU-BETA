@@ -2,10 +2,6 @@
 #import <Foundation/Foundation.h>
 #import <Metal/Metal.h>
 #import <MetalKit/MetalKit.h>
-// MainWindow.h
-#import <UIKit/UIKit.h>
-
-extern UIWindow *mainWindow; // ประกาศ extern
 // Imgui library.
 #import "Esp/CaptainHook.h"
 #import "Esp/ImGuiDrawView.h"
