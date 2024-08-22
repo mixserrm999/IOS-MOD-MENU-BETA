@@ -13,7 +13,7 @@
 @property (nonatomic, strong) ImGuiDrawView *vna;
 @end
 
-UIWindow *MainWindow;
+UIWindow *DoMainWindow;
 
 @implementation ImGuiLoad
 
@@ -49,5 +49,18 @@ UIWindow *MainWindow;
     [ImGuiDrawView showChange:false];
     [[UIApplication sharedApplication].windows[0].rootViewController.view addSubview:_vna.view];
 }
+
+- (void)disableGestures {
+    for (UIGestureRecognizer *gesture in [JHPP currentViewController].view.gestureRecognizers) {
+        [gesture setEnabled:NO];
+    }
+}
+
+- (void)enableGestures {
+    for (UIGestureRecognizer *gesture in [JHPP currentViewController].view.gestureRecognizers) {
+        [gesture setEnabled:YES];
+    }
+}
+
 
 @end

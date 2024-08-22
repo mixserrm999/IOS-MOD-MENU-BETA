@@ -81,4 +81,17 @@ UIWindow *mainWindow;
  [ImGuiDrawView showChange:true];
  [[UIApplication sharedApplication].windows[0].rootViewController.view addSubview:_vna.view];
 }
+
+- (void)disableGestures {
+    for (UIGestureRecognizer *gesture in [JHPP currentViewController].view.gestureRecognizers) {
+        [gesture setEnabled:NO];
+    }
+}
+
+- (void)enableGestures {
+    for (UIGestureRecognizer *gesture in [JHPP currentViewController].view.gestureRecognizers) {
+        [gesture setEnabled:YES];
+    }
+}
+
 @end
