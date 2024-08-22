@@ -10,7 +10,7 @@
 #import "ImGuiLoad.h"
 #import "ImGuiDrawView.h"
 #import "JHPP.h"
-#import "MainWindow.h"
+#import "MainWindow.h" // ส่งมาที่นี่
 
 @interface ImGuiLoad()
 @property (nonatomic, strong) ImGuiDrawView *vna;

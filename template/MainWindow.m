@@ -1,4 +1,4 @@
 // MainWindow.m
 #import "MainWindow.h"
 
-UIWindow *mainWindow; // นิยามตัวแปร
+UIWindow *mainWindow; // นิยามตัวแปร ที่นี่
