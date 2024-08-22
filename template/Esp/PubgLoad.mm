@@ -8,7 +8,7 @@
 
 #import "PubgLoad.h"
 #import <UIKit/UIKit.h>
-#import "MainWindow.h"
+#import "include.h"
 #import "JHPP.h"
 #import "JHDragView.h"
 #import "ImGuiLoad.h"
@@ -21,7 +21,7 @@
 
 static PubgLoad *extraInfo;
 
-UIWindow *mainWindow;
+
 
 
 + (void)load
