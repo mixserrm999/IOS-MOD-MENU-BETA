@@ -9,6 +9,7 @@
 
 #import "ImGuiLoad.h"
 #import "ImGuiDrawView.h"
+#import "JHPP.h"
 
 @interface ImGuiLoad()
 @property (nonatomic, strong) ImGuiDrawView *vna;
