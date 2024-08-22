@@ -117,7 +117,7 @@ return self;
     
     id<MTLCommandBuffer> commandBuffer = [self.commandQueue commandBuffer];
     
-    embraceTheDarkness(); //THEME
+    embraceTheDarkness(); //THEME //
 
     [self.view setUserInteractionEnabled:(MenDeal ? YES : NO)];
 
