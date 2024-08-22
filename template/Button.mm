@@ -115,7 +115,6 @@
     self.mtkView.clearColor = MTLClearColorMake(0, 0, 0, 0);
     self.mtkView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
     self.mtkView.clipsToBounds = YES;
-    self.view.multipleTouchEnabled = YES; // เปิดใช้งานการสัมผัสหลายจุด
 }
 
 #pragma mark - Interaction

@@ -2,6 +2,7 @@
 #import <Foundation/Foundation.h>
 #import <Metal/Metal.h>
 #import <MetalKit/MetalKit.h>
+#import "MainWindow.h"
 // Imgui library.
 #import "Esp/CaptainHook.h"
 #import "Esp/ImGuiDrawView.h"

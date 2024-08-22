@@ -10,12 +10,13 @@
 #import "ImGuiLoad.h"
 #import "ImGuiDrawView.h"
 #import "JHPP.h"
+#import "MainWindow.h"
 
 @interface ImGuiLoad()
 @property (nonatomic, strong) ImGuiDrawView *vna;
 @end
 
-UIWindow *DoMainWindow;
+UIWindow *mainWindow;
 
 @implementation ImGuiLoad
 
@@ -50,18 +51,6 @@ UIWindow *DoMainWindow;
     
     [ImGuiDrawView showChange:false];
     [[UIApplication sharedApplication].windows[0].rootViewController.view addSubview:_vna.view];
-}
-
-- (void)disableGestures {
-    for (UIGestureRecognizer *gesture in [JHPP currentViewController].view.gestureRecognizers) {
-        [gesture setEnabled:NO];
-    }
-}
-
-- (void)enableGestures {
-    for (UIGestureRecognizer *gesture in [JHPP currentViewController].view.gestureRecognizers) {
-        [gesture setEnabled:YES];
-    }
 }
 
 
