@@ -10,12 +10,12 @@
 #import "ImGuiLoad.h"
 #import "ImGuiDrawView.h"
 #import "JHPP.h"
-#import "MainWindow.h" // ส่งมาที่นี่
+#import "AppManager.h"
 
 @interface ImGuiLoad()
 @property (nonatomic, strong) ImGuiDrawView *vna;
 @end
-
+UIWindow *window = [AppManager sharedInstance].mainWindow;
 @implementation ImGuiLoad
 
 + (instancetype)share

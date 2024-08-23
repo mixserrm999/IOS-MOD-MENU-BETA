@@ -8,7 +8,7 @@
 
 #import "PubgLoad.h"
 #import <UIKit/UIKit.h>
-#import "MainWindow.h" // ส่งมาที่นี่
+#import "AppManager.h"
 #import "JHPP.h"
 #import "JHDragView.h"
 #import "ImGuiLoad.h"
@@ -16,10 +16,12 @@
 @interface PubgLoad()
 @property (nonatomic, strong) ImGuiDrawView *vna;
 @end
-
+[AppManager sharedInstance].mainWindow = someWindow;
 @implementation PubgLoad
 
 static PubgLoad *extraInfo;
+
+
 
 
 

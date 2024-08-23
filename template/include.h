@@ -5,6 +5,7 @@
 // Imgui library.
 #import "Esp/CaptainHook.h"
 #import "Esp/ImGuiDrawView.h"
+#import "Esp/AppManager.h"
 #import "IMGUI/Honkai.h"
 #import "IMGUI/imgui.h"
 #import "IMGUI/imgui_impl_metal.h"
