@@ -31,7 +31,7 @@ TWEAK_NAME = @@PROJECTNAME@@
 #If you want to change TWEAK_NAME just change up here. It will automatically change these below, don't need to change it by hand anymore!
 
 $(TWEAK_NAME)_FRAMEWORKS =  UIKit Foundation Security QuartzCore CoreGraphics CoreText  AVFoundation Accelerate GLKit SystemConfiguration GameController
-
+LDFLAGS += -Xlinker -commons
 $(TWEAK_NAME)_CCFLAGS = -std=c++11 -fno-rtti -fno-exceptions -DNDEBUG
 $(TWEAK_NAME)_CFLAGS = -fobjc-arc -Wno-deprecated-declarations -Wno-unused-variable -Wno-unused-value
 #Add dobby hook
