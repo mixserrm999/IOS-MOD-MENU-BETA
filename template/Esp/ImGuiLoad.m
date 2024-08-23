@@ -1,12 +1,3 @@
-//
-//  ImGuiLoad.m
-//  ImGuiTest
-//
-//  Created by yiming on 2021/6/2..
-//
-//
-// // //
-
 #import "ImGuiLoad.h"
 #import "ImGuiDrawView.h"
 #import "JHPP.h"
@@ -15,11 +6,10 @@
 @interface ImGuiLoad()
 @property (nonatomic, strong) ImGuiDrawView *vna;
 @end
-UIWindow *window = [AppManager sharedInstance].mainWindow;
+
 @implementation ImGuiLoad
 
-+ (instancetype)share
-{
++ (instancetype)share {
     static ImGuiLoad *tool;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -28,28 +18,31 @@ UIWindow *window = [AppManager sharedInstance].mainWindow;
     return tool;
 }
 
-- (void)show
-{
+- (void)show {
     if (!_vna) {
         ImGuiDrawView *vc = [[ImGuiDrawView alloc] init];
         _vna = vc;
     }
 
-
-    [ImGuiDrawView showChange:true];
-    [[UIApplication sharedApplication].windows[0].rootViewController.view addSubview:_vna.view];
+    UIWindow *window = [AppManager sharedInstance].mainWindow;
+    if (window) {
+        [ImGuiDrawView showChange:true];
+        [window.rootViewController.view addSubview:_vna.view];
+    }
 }
 
-- (void)hide
-{
+- (void)hide {
     if (!_vna) {
         ImGuiDrawView *vc = [[ImGuiDrawView alloc] init];
         _vna = vc;
     }
-    
-    [ImGuiDrawView showChange:false];
-    [[UIApplication sharedApplication].windows[0].rootViewController.view addSubview:_vna.view];
-}
 
+    UIWindow *window = [AppManager sharedInstance].mainWindow;
+    if (window) {
+        [ImGuiDrawView showChange:false];
+        [window.rootViewController.view addSubview:_vna.view];
+    }
+}
 
 @end
+
