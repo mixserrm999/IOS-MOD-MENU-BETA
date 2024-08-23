@@ -1,4 +1,4 @@
-// AppManager.h
+// AppManager.h //
 
 #import <UIKit/UIKit.h>
 
