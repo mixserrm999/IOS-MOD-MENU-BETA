@@ -37,7 +37,7 @@ $(TWEAK_NAME)_CFLAGS = -fobjc-arc -Wno-deprecated-declarations -Wno-unused-varia
 #Add dobby hook
 $(TWEAK_NAME)_OBJ_FILES = 5Toubun/libdobby.a
 
-$(TWEAK_NAME)_FILES = @@MAIN@@.mm MainWindow.m $(wildcard Esp/*.mm) $(wildcard Esp/*.m) $(wildcard IMGUI/*.cpp) $(wildcard IMGUI/*.mm) $(wildcard KittyMemory/*.cpp) $(wildcard KittyMemory/*.mm)  
+$(TWEAK_NAME)_FILES = @@MAIN@@.mm $(wildcard Esp/*.mm) $(wildcard Esp/*.m) $(wildcard IMGUI/*.cpp) $(wildcard IMGUI/*.mm) $(wildcard KittyMemory/*.cpp) $(wildcard KittyMemory/*.mm)  
 
 $(TWEAK_NAME)_LIBRARIES += substrate
 # GO_EASY_ON_ME = 1
