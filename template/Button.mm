@@ -13,7 +13,7 @@
 @property (nonatomic, strong) id<MTLDevice> device;
 @property (nonatomic, strong) id<MTLCommandQueue> commandQueue;
 @property (nonatomic, strong) UIButton *toggleMenuButton; // Added toggle button
-@property (nonatomic, assign) BOOL isMenuEnabled; // Track menu enabled state separately. // //
+@property (nonatomic, assign) BOOL isMenuEnabled; // Track menu enabled state separately.
 
 @end
 
