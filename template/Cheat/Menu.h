@@ -197,7 +197,7 @@ void drawMenu(bool MenDeal)
             char timeString[50];
             strftime(timeString, sizeof(timeString), "%H:%M:%S", localTime);
 
-            // Show the time in the menu
+            // Show the time in the menu.
             ImGui::Text("Current Time: %s", timeString);
             float batteryLevel = [UIDevice currentDevice].batteryLevel * 100;
             ImGui::Text("Battery Level: %.0f%%", batteryLevel);
