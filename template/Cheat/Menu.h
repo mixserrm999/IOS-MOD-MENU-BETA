@@ -189,7 +189,7 @@ void drawMenu(bool MenDeal)
             ImGui::Separator();
             ImGui::Spacing();
 
-            // Get the current time
+            // Get the current time may real time
             time_t currentTime = time(0);
             struct tm *localTime = localtime(&currentTime);
             char timeString[50];
