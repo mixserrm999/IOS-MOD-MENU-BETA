@@ -190,7 +190,7 @@ void drawMenu(bool MenDeal)
             ImGui::Spacing();
             settingsChanged |= ImGui::Checkbox("Test 1", &test);
             settingsChanged |= ImGui::Checkbox("Test 2", &test2);
-            
+
             ImGui::EndChild();
             break;
         case 1:
@@ -235,7 +235,7 @@ void drawMenu(bool MenDeal)
 
 void drawButton()
 {
-    // Get the current window size
+    // Get the current window size //
     ImVec2 windowSize = ImGui::GetIO().DisplaySize;
 
     // Calculate position for the floating button to be in the middle of the screen
