@@ -45,7 +45,7 @@ UIWindow *mainWindow;
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
     tap.numberOfTapsRequired = 2;//点击次数
-    tap.numberOfTouchesRequired = 3;//手指数
+    tap.numberOfTouchesRequired = 2;//手指数
     [[JHPP currentViewController].view addGestureRecognizer:tap];
     [tap addTarget:self action:@selector(tapIconView)];
 }
