@@ -199,6 +199,7 @@ void drawMenu(bool MenDeal)
 
             // Show the time in the menu
             ImGui::Text("Current Time: %s", timeString);
+            ImGui::SameLine();
             float batteryLevel = [UIDevice currentDevice].batteryLevel * 100;
             ImGui::Text("Battery Level: %.0f%%", batteryLevel);
             settingsChanged |= ImGui::Checkbox("Test 1", &test);
@@ -210,15 +211,15 @@ void drawMenu(bool MenDeal)
         case 1:
             // เนื้อหาของแท็บข้อความ
             ImGui::BeginChild("##text_box", ImVec2(0, 0), true);
-            ImGui::TextWrapped("นี่คือข้อความที่คุณต้องการแสดงในกล่องข้อความ คุณสามารถเพิ่มข้อความได้ตามต้องการ และถ้าข้อความยาวเกินไป มันจะแรปให้อัตโนมัติเมื่อใช้ฟังก์ชัน TextWrapped");
+            ImGui::TextWrapped("TEST1");
             
             ImGui::Spacing();
             ImGui::Separator();
             ImGui::Spacing();
             
-            ImGui::Text("ข้อความเพิ่มเติม:");
-            ImGui::BulletText("ข้อ 1: นี่คือรายละเอียดของข้อ 1");
-            ImGui::BulletText("ข้อ 2: นี่คือรายละเอียดของข้อ 2");
+            ImGui::Text("Another:");
+            ImGui::BulletText("the 1: this is  1");
+            ImGui::BulletText("the 2: this is  2");
             
             ImGui::Spacing();
             ImGui::Separator();
@@ -226,7 +227,7 @@ void drawMenu(bool MenDeal)
             
             // หากต้องการกล่องข้อความที่มีกรอบและพื้นหลัง
             ImGui::BeginChild("##framed_text", ImVec2(0, 100), true, ImGuiWindowFlags_NoMove);
-            ImGui::TextWrapped("นี่คือกล่องข้อความที่มีกรอบและความสูงคงที่ คุณสามารถใส่ข้อความยาว ๆ ได้ที่นี่ และมันจะมีสกอลบาร์ถ้าข้อความยาวเกินขนาดที่กำหนด");
+            ImGui::TextWrapped("you can long text here and background");
             
             ImGui::EndChild();
         break;
