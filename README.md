@@ -8,12 +8,20 @@
 - Provide customized user interface (UI) -
 - Support multi-touch control
 
-## INSTALL
+## TOOLS
 1. `google cloud shell` [ggcs](https://shell.cloud.google.com/?pli=1&show=ide%2Cterminal)
 2. `theos` [theos-for-google-cloud-shell](https://theos.dev/docs/installation-linux)
 3. `sdk ios` [this](https://github.com/xybp888/iOS-SDKs) `or` [this](https://github.com/theos/sdks)
-4. ปรับแต่งการตั้งค่าให้เหมาะสมกับความต้องการของคุณ
-5. คอมไพล์โปรเจกต์ของคุณและนำไปใช้ในอุปกรณ์ iOS ของคุณ
+
+## INSTALL
+1. `go to google shell` and input
+```
+apt install bash curl
+```
+2. `input theos bash`
+```
+ bash -c "$(curl -fsSL https://raw.githubusercontent.com/theos/theos/master/bin/install-theos)"
+```
 
 ## MORE IMG
 ![Menu Screenshot](path_to_your_image.png)
