@@ -76,8 +76,8 @@
     [self.toggleMenuButton addTarget:self action:@selector(toggleMenuButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.toggleMenuButton];
 
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-    [self.toggleMenuButton addGestureRecognizer:panGesture];
+    // UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    // [self.toggleMenuButton addGestureRecognizer:panGesture];
     
     // Initially, enable menu and button interaction
     self.isMenuEnabled = NO;
@@ -87,15 +87,19 @@
 
 - (void)toggleMenuButtonTapped {
     self.isMenuEnabled = !self.isMenuEnabled;
-    [self.mtkView setNeedsDisplay]; // Force MTKView to redraw
-    [self.view setNeedsDisplay]; // Force view to redraw if necessary
+
+    // Force MTKView and button to redraw
+    [self.mtkView setNeedsDisplay];
+    [self.view setNeedsDisplay];
 
     if (self.isMenuEnabled) {
         [self.mtkView setUserInteractionEnabled:YES];
     } else {
         [self.mtkView setUserInteractionEnabled:NO];
     }
-    [self.toggleMenuButton setNeedsDisplay]; // Ensure the button remains interactive
+
+    // Ensure the button remains interactive
+    self.toggleMenuButton.userInteractionEnabled = YES;
 }
 
 
