@@ -183,7 +183,7 @@ void drawMenu(bool MenDeal)
 
         switch (tab)
         {
-        case 0:
+        case 0: {
             ImGui::BeginChild("##scroll_memory", ImVec2(0, 0), true);
             ImGui::Text("Memory settings");
             ImGui::Separator();
@@ -202,6 +202,7 @@ void drawMenu(bool MenDeal)
 
             ImGui::EndChild();
             break;
+        }
         case 1:
             // เนื้อหาของแท็บข้อความ
             ImGui::BeginChild("##text_box", ImVec2(0, 0), true);
