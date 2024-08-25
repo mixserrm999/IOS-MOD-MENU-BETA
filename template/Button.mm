@@ -74,6 +74,9 @@
     [self.toggleMenuButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.toggleMenuButton.alpha = 0.8; // 50% transparent
     [self.toggleMenuButton addTarget:self action:@selector(toggleMenuButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    self.toggleMenuButton.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.7]; // Black transparent background
+    self.toggleMenuButton.alpha = 0.8; // 80% transparent
+
     [self.view addSubview:self.toggleMenuButton];
 
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
@@ -88,6 +91,9 @@
 - (void)toggleMenuButtonTapped {
     self.isMenuEnabled = !self.isMenuEnabled; // Toggle the menu state
     [self.view setUserInteractionEnabled:YES]; // Ensure button remains interactive
+    self.toggleMenuButton.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.7]; // Black transparent background
+    self.toggleMenuButton.alpha = 0.8; // 80% transparent
+
 }
 
 + (void)showChange:(BOOL)open {
@@ -120,21 +126,21 @@
 #pragma mark - Interaction
 
 - (void)updateIOWithTouchEvent:(UIEvent *)event {
+    UITouch *anyTouch = event.allTouches.anyObject;
+    CGPoint touchLocation = [anyTouch locationInView:self.view];
     ImGuiIO &io = ImGui::GetIO();
-    io.MousePos = ImVec2(-FLT_MAX, -FLT_MAX); // Reset mouse position if no active touch
+    io.MousePos = ImVec2(touchLocation.x, touchLocation.y);
     
     BOOL hasActiveTouch = NO;
     for (UITouch *touch in event.allTouches) {
-        CGPoint touchLocation = [touch locationInView:self.view];
-        io.MousePos = ImVec2(touchLocation.x, touchLocation.y);
-        io.MouseDown[0] = YES;
-        hasActiveTouch = YES;
+        if (touch.phase != UITouchPhaseEnded &&
+            touch.phase != UITouchPhaseCancelled) {
+            hasActiveTouch = YES;
+            break;
+        }
     }
-    if (!hasActiveTouch) {
-        io.MouseDown[0] = NO;
-    }
+    io.MouseDown[0] = hasActiveTouch;
 }
-
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     if (!self.isMenuEnabled) {
