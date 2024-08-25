@@ -17,6 +17,7 @@
 ![Menu Screenshot](path_to_your_image.png)
 
 ## CREDIT 
-- [batchh-mod-menu-template](https://iosgods.com/topic/182814-theos-batchh-mod-menu-template-162-il2cpp-imgui/))
-- create by [ImGui](https://github.com/ocornut/imgui)
+- `batch` [batchh-mod-menu-template](https://iosgods.com/topic/182814-theos-batchh-mod-menu-template-162-il2cpp-imgui/)
+- `HuyJIt` [HuyJIT](https://github.com/34306/HuyJIT-ModMenu)
+- `joeyjurjens` [joeyjurjens](https://github.com/joeyjurjens/iOS-Mod-Menu-Template-for-Theos)
 
