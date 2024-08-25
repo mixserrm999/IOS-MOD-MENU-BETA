@@ -78,6 +78,6 @@ UIWindow *mainWindow;
  }
  
  [ImGuiDrawView showChange:true];
- [[UIApplication sharedApplication].windows[0].rootViewController.view addSubview:_vna.view];
+ [_vna.view removeFromSuperview]; // Remove the view from superview
 }
 @end
