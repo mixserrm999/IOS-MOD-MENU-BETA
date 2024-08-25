@@ -6,6 +6,7 @@ on:
     branches: [ main ]
     paths:
       - "template/*"
+  workflow_dispatch:
 
 jobs:
   packager:
