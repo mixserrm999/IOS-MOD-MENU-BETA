@@ -87,8 +87,14 @@
 
 - (void)toggleMenuButtonTapped {
     self.isMenuEnabled = !self.isMenuEnabled; // Toggle the menu state
-    [self.view setUserInteractionEnabled:YES]; // Ensure button remains interactive
+
+    if (!self.isMenuEnabled) {
+        [self.view setUserInteractionEnabled:NO]; // Disable interaction when the menu is closed
+    } else {
+        [self.view setUserInteractionEnabled:YES]; // Enable interaction when the menu is open
+    }
 }
+
 
 + (void)showChange:(BOOL)open {
     // This method can be used to control menu visibility elsewhere if needed
