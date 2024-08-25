@@ -87,8 +87,14 @@
 
 - (void)toggleMenuButtonTapped {
     self.isMenuEnabled = !self.isMenuEnabled; // Toggle the menu state
-    [self.view setUserInteractionEnabled:YES]; // Ensure button remains interactive
+    
+    if (self.isMenuEnabled) {
+        [self.view setUserInteractionEnabled:NO]; // Disable interaction with the game when the menu is enabled
+    } else {
+        [self.view setUserInteractionEnabled:YES]; // Enable interaction with the game when the menu is disabled
+    }
 }
+
 
 + (void)showChange:(BOOL)open {
     // This method can be used to control menu visibility elsewhere if needed
@@ -138,35 +144,36 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     if (!self.isMenuEnabled) {
-        [super touchesBegan:touches withEvent:event]; // Pass touch events to the superclass (game interaction)
+        [super touchesBegan:touches withEvent:event]; // ส่งผ่านเหตุการณ์สัมผัสไปยังเกม
     } else {
-        [self updateIOWithTouchEvent:event]; // Handle ImGui touch interaction
+        [self updateIOWithTouchEvent:event]; // ส่งผ่านเหตุการณ์สัมผัสไปยัง ImGui
     }
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     if (!self.isMenuEnabled) {
-        [super touchesMoved:touches withEvent:event]; // Pass touch events to the superclass (game interaction)
+        [super touchesMoved:touches withEvent:event]; // ส่งผ่านเหตุการณ์สัมผัสไปยังเกม
     } else {
-        [self updateIOWithTouchEvent:event]; // Handle ImGui touch interaction
+        [self updateIOWithTouchEvent:event]; // ส่งผ่านเหตุการณ์สัมผัสไปยัง ImGui
     }
 }
 
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     if (!self.isMenuEnabled) {
-        [super touchesCancelled:touches withEvent:event]; // Pass touch events to the superclass (game interaction)
+        [super touchesCancelled:touches withEvent:event]; // ส่งผ่านเหตุการณ์สัมผัสไปยังเกม
     } else {
-        [self updateIOWithTouchEvent:event]; // Handle ImGui touch interaction
+        [self updateIOWithTouchEvent:event]; // ส่งผ่านเหตุการณ์สัมผัสไปยัง ImGui
     }
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     if (!self.isMenuEnabled) {
-        [super touchesEnded:touches withEvent:event]; // Pass touch events to the superclass (game interaction)
+        [super touchesEnded:touches withEvent:event]; // ส่งผ่านเหตุการณ์สัมผัสไปยังเกม
     } else {
-        [self updateIOWithTouchEvent:event]; // Handle ImGui touch interaction
+        [self updateIOWithTouchEvent:event]; // ส่งผ่านเหตุการณ์สัมผัสไปยัง ImGui
     }
 }
+
 
 #pragma mark - MTKViewDelegate
 
