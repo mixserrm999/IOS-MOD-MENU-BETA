@@ -74,9 +74,6 @@
     [self.toggleMenuButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.toggleMenuButton.alpha = 0.8; // 50% transparent
     [self.toggleMenuButton addTarget:self action:@selector(toggleMenuButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    self.toggleMenuButton.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.7]; // Black transparent background
-    self.toggleMenuButton.alpha = 0.8; // 80% transparent
-
     [self.view addSubview:self.toggleMenuButton];
 
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
@@ -90,10 +87,14 @@
 
 - (void)toggleMenuButtonTapped {
     self.isMenuEnabled = !self.isMenuEnabled; // Toggle the menu state
+    if (self.isMenuEnabled) {
+        // Enable user interaction with the menu
+        [self.mtkView setUserInteractionEnabled:YES];
+    } else {
+        // Disable user interaction with the menu
+        [self.mtkView setUserInteractionEnabled:NO];
+    }
     [self.view setUserInteractionEnabled:YES]; // Ensure button remains interactive
-    self.toggleMenuButton.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.7]; // Black transparent background
-    self.toggleMenuButton.alpha = 0.8; // 80% transparent
-
 }
 
 + (void)showChange:(BOOL)open {
