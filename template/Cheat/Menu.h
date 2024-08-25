@@ -1,6 +1,7 @@
 #include "../include.h"
 #include "Settings.h"
 #include <chrono>
+#import <UIKit/UIKit.h>
 // here create your menu
 
 int tab = 0;
@@ -120,6 +121,7 @@ void drawWelcome(const char *message, const char* gameInfo, const char* author)
 
 void drawMenu(bool MenDeal)
 {
+    [UIDevice currentDevice].batteryMonitoringEnabled = YES;
     static bool animating = true;
     static bool wasMenuOpen = false;
     static auto startTime = std::chrono::high_resolution_clock::now();
@@ -197,6 +199,8 @@ void drawMenu(bool MenDeal)
 
             // Show the time in the menu
             ImGui::Text("Current Time: %s", timeString);
+            float batteryLevel = [UIDevice currentDevice].batteryLevel * 100;
+            ImGui::Text("Battery Level: %.0f%%", batteryLevel);
             settingsChanged |= ImGui::Checkbox("Test 1", &test);
             settingsChanged |= ImGui::Checkbox("Test 2", &test2);
 
