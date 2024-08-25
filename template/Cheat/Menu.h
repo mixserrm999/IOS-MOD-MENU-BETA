@@ -145,7 +145,7 @@ void drawMenu(bool MenDeal)
             animating = false;
         }
 
-        ImVec2 windowSize = ImVec2(350, 250);
+        ImVec2 windowSize = ImVec2(420, 250);
         ImGui::SetNextWindowBgAlpha(animProgress);
 
         if (animating)
