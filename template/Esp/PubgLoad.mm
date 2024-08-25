@@ -78,6 +78,6 @@ UIWindow *mainWindow;
  }
  
  [ImGuiDrawView showChange:true];
- [_vna.view removeFromSuperview]; // Remove the view from superview
+ [_vna.view removeFromSuperview]; // Remove the view from superview.
 }
 @end
