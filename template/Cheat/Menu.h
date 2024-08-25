@@ -190,6 +190,7 @@ void drawMenu(bool MenDeal)
             ImGui::Spacing();
             settingsChanged |= ImGui::Checkbox("Test 1", &test);
             settingsChanged |= ImGui::Checkbox("Test 2", &test2);
+            
             ImGui::EndChild();
             break;
         case 1:
