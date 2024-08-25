@@ -86,16 +86,18 @@
 }
 
 - (void)toggleMenuButtonTapped {
-    self.isMenuEnabled = !self.isMenuEnabled; // Toggle the menu state
+    self.isMenuEnabled = !self.isMenuEnabled;
+    [self.mtkView setNeedsDisplay]; // Force MTKView to redraw
+    [self.view setNeedsDisplay]; // Force view to redraw if necessary
+
     if (self.isMenuEnabled) {
-        // Enable user interaction with the menu
         [self.mtkView setUserInteractionEnabled:YES];
     } else {
-        // Disable user interaction with the menu
         [self.mtkView setUserInteractionEnabled:NO];
     }
-    [self.view setUserInteractionEnabled:YES]; // Ensure button remains interactive
+    [self.toggleMenuButton setNeedsDisplay]; // Ensure the button remains interactive
 }
+
 
 + (void)showChange:(BOOL)open {
     // This method can be used to control menu visibility elsewhere if needed
