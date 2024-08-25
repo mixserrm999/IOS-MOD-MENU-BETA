@@ -209,7 +209,7 @@ void drawMenu(bool MenDeal)
             ImGui::Separator();
             ImGui::Spacing();
             
-            // หากต้องการกล่องข้อความที่มีกรอบและพื้นหลัง //
+            // หากต้องการกล่องข้อความที่มีกรอบและพื้นหลัง
             ImGui::BeginChild("##framed_text", ImVec2(0, 100), true, ImGuiWindowFlags_NoMove);
             ImGui::TextWrapped("นี่คือกล่องข้อความที่มีกรอบและความสูงคงที่ คุณสามารถใส่ข้อความยาว ๆ ได้ที่นี่ และมันจะมีสกอลบาร์ถ้าข้อความยาวเกินขนาดที่กำหนด");
             
