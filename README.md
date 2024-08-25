@@ -23,18 +23,18 @@ apt install bash curl
  bash -c "$(curl -fsSL https://raw.githubusercontent.com/theos/theos/master/bin/install-theos)"
 ```
 3. `go to templates in theos`
-   ```
-   cd theos/vendor/templates
-   ```
+```
+cd theos/vendor/templates
+```
 4. `wget your project .nic.tar dont unzip`
 ```
 wget https://github.com/raw/your-nic.tar
 ```
 5. `go to main google shell`
-   ```
-   cd
-   $THEOS/bin/nic.pl
-   ```
+```
+cd
+$THEOS/bin/nic.pl
+```
    
 
 ## MORE IMG
