@@ -1,30 +1,22 @@
-# ชื่อเมนู
+# SERMIX MOD MENU
 
 ![Menu Screenshot](0C7147F4-5081-45BC-92DB-CD21689D303D.png)
 
-## คำอธิบาย
-`ชื่อเมนู` เป็นเมนู mod สำหรับเกมของคุณ ที่สามารถใช้เพื่อเพิ่มคุณสมบัติพิเศษต่าง ๆ ในเกม โดยใช้ ImGui ในการแสดงผลบนหน้าจอเกม และสามารถควบคุมการแสดงผลของ mod menu ได้โดยใช้ gesture 2 นิ้วในการเปิด และ 3 นิ้วในการปิด
+## HOW TO USE
+- Use 3 finger gesture to close the mod menu icon -
+- Use 2 finger gesture like the mod menu icon -
+- Provide customized user interface (UI) -
+- Support multi-touch control
 
-## คุณสมบัติ
-- ใช้ gesture 3 นิ้วเพื่อปิด icon mod menu
-- ใช้ gesture 2 นิ้วเพื่อแสดง icon mod menu
-- อินเทอร์เฟซผู้ใช้ (UI) ที่ปรับแต่งได้ง่าย
-- รองรับการควบคุมหลายจุดสัมผัส (Multi-touch)
-
-## การติดตั้ง
+## INSTALL
 1. คัดลอกโค้ดทั้งหมดไปยังโปรเจกต์ของคุณ
 2. ปรับแต่งการตั้งค่าให้เหมาะสมกับความต้องการของคุณ
 3. คอมไพล์โปรเจกต์ของคุณและนำไปใช้ในอุปกรณ์ iOS ของคุณ
 
-## การใช้งาน
-- ใช้ gesture 2 นิ้วเพื่อแสดง icon mod menu บนหน้าจอเกม
-- ใช้ gesture 3 นิ้วเพื่อปิด icon mod menu เมื่อไม่ต้องการให้แสดงผล
-
-## ภาพหน้าจอ
+## MORE IMG
 ![Menu Screenshot](path_to_your_image.png)
 
-## Credit
-- พัฒนาโดย [ชื่อคุณหรือทีมของคุณ](link_to_your_profile)
-- สร้างขึ้นโดยใช้ [ImGui](https://github.com/ocornut/imgui)
-- ขอบคุณพิเศษสำหรับผู้สนับสนุนและผู้ทดสอบทุกคน
+## CREDIT 
+- [batchh-mod-menu-template]([link_to_your_profile](https://iosgods.com/topic/182814-theos-batchh-mod-menu-template-162-il2cpp-imgui/))
+- create by [ImGui](https://github.com/ocornut/imgui)
 
