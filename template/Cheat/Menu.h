@@ -171,6 +171,12 @@ void drawMenu(bool MenDeal)
             tab = 0;
         }
 
+        ImGui::Spacing();
+        if (ImGui::Button("credit", ImVec2(100.0f, 40.0f)))
+        {
+            tab = 1;
+        }
+
         ImGui::NextColumn();
 
         bool settingsChanged = false;
@@ -186,6 +192,29 @@ void drawMenu(bool MenDeal)
             settingsChanged |= ImGui::Checkbox("Test 2", &test2);
             ImGui::EndChild();
             break;
+        case 1:
+            // เนื้อหาของแท็บข้อความ
+            ImGui::BeginChild("##text_box", ImVec2(0, 0), true);
+            ImGui::TextWrapped("นี่คือข้อความที่คุณต้องการแสดงในกล่องข้อความ คุณสามารถเพิ่มข้อความได้ตามต้องการ และถ้าข้อความยาวเกินไป มันจะแรปให้อัตโนมัติเมื่อใช้ฟังก์ชัน TextWrapped");
+            
+            ImGui::Spacing();
+            ImGui::Separator();
+            ImGui::Spacing();
+            
+            ImGui::Text("ข้อความเพิ่มเติม:");
+            ImGui::BulletText("ข้อ 1: นี่คือรายละเอียดของข้อ 1");
+            ImGui::BulletText("ข้อ 2: นี่คือรายละเอียดของข้อ 2");
+            
+            ImGui::Spacing();
+            ImGui::Separator();
+            ImGui::Spacing();
+            
+            // หากต้องการกล่องข้อความที่มีกรอบและพื้นหลัง
+            ImGui::BeginChild("##framed_text", ImVec2(0, 100), true, ImGuiWindowFlags_NoMove);
+            ImGui::TextWrapped("นี่คือกล่องข้อความที่มีกรอบและความสูงคงที่ คุณสามารถใส่ข้อความยาว ๆ ได้ที่นี่ และมันจะมีสกอลบาร์ถ้าข้อความยาวเกินขนาดที่กำหนด");
+            
+            ImGui::EndChild();
+        break;
         }
 
         if (settingsChanged)
