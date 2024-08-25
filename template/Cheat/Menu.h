@@ -188,6 +188,15 @@ void drawMenu(bool MenDeal)
             ImGui::Text("Memory settings");
             ImGui::Separator();
             ImGui::Spacing();
+
+            // Get the current time
+            time_t currentTime = time(0);
+            struct tm *localTime = localtime(&currentTime);
+            char timeString[50];
+            strftime(timeString, sizeof(timeString), "%H:%M:%S", localTime);
+
+            // Show the time in the menu
+            ImGui::Text("Current Time: %s", timeString);
             settingsChanged |= ImGui::Checkbox("Test 1", &test);
             settingsChanged |= ImGui::Checkbox("Test 2", &test2);
 
