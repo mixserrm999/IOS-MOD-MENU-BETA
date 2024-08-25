@@ -2,7 +2,7 @@
 #include <Foundation/Foundation.h>
 #include "Cheat/Patches.h"
 #include "Cheat/Menu.h"
-#include "Cheat/Handle.h" //
+#include "Cheat/Handle.h"
 
 #define kWidth [UIScreen mainScreen].bounds.size.width
 #define kHeight [UIScreen mainScreen].bounds.size.height
@@ -86,22 +86,9 @@
 }
 
 - (void)toggleMenuButtonTapped {
-    self.isMenuEnabled = !self.isMenuEnabled;
-    NSLog(@"Menu Enabled: %@", self.isMenuEnabled ? @"YES" : @"NO");
-
-    if (self.isMenuEnabled) {
-        [self.view setUserInteractionEnabled:YES];
-        // อัปเดตมุมมองหากจำเป็น
-        [self.mtkView setNeedsDisplay];
-    } else {
-        [self.view setUserInteractionEnabled:NO];
-        // อัปเดตมุมมองหากจำเป็น
-        [self.mtkView setNeedsDisplay];
-    }
+    self.isMenuEnabled = !self.isMenuEnabled; // Toggle the menu state
+    [self.view setUserInteractionEnabled:YES]; // Ensure button remains interactive
 }
-
-
-
 
 + (void)showChange:(BOOL)open {
     // This method can be used to control menu visibility elsewhere if needed
@@ -133,21 +120,21 @@
 #pragma mark - Interaction
 
 - (void)updateIOWithTouchEvent:(UIEvent *)event {
-    UITouch *anyTouch = event.allTouches.anyObject;
-    CGPoint touchLocation = [anyTouch locationInView:self.view];
     ImGuiIO &io = ImGui::GetIO();
-    io.MousePos = ImVec2(touchLocation.x, touchLocation.y);
+    io.MousePos = ImVec2(-FLT_MAX, -FLT_MAX); // Reset mouse position if no active touch
     
     BOOL hasActiveTouch = NO;
     for (UITouch *touch in event.allTouches) {
-        if (touch.phase != UITouchPhaseEnded &&
-            touch.phase != UITouchPhaseCancelled) {
-            hasActiveTouch = YES;
-            break;
-        }
+        CGPoint touchLocation = [touch locationInView:self.view];
+        io.MousePos = ImVec2(touchLocation.x, touchLocation.y);
+        io.MouseDown[0] = YES;
+        hasActiveTouch = YES;
     }
-    io.MouseDown[0] = hasActiveTouch;
+    if (!hasActiveTouch) {
+        io.MouseDown[0] = NO;
+    }
 }
+
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     if (!self.isMenuEnabled) {
@@ -187,53 +174,52 @@
     ImGuiIO &io = ImGui::GetIO();
     io.DisplaySize.x = view.bounds.size.width;
     io.DisplaySize.y = view.bounds.size.height;
-
+    
     CGFloat framebufferScale = view.window.screen.scale ?: UIScreen.mainScreen.scale;
     io.DisplayFramebufferScale = ImVec2(framebufferScale, framebufferScale);
     io.DeltaTime = 1 / float(view.preferredFramesPerSecond ?: 120);
-
+    
     id<MTLCommandBuffer> commandBuffer = [self.commandQueue commandBuffer];
-
+    
     embraceTheDarkness(); // theme
-
+    
     MTLRenderPassDescriptor *renderPassDescriptor = view.currentRenderPassDescriptor;
     if (renderPassDescriptor != nil) {
         id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:renderPassDescriptor];
         [renderEncoder pushDebugGroup:@"ImGui Jane"];
-
+        
         ImGui_ImplMetal_NewFrame(renderPassDescriptor);
         ImGui::NewFrame();
-
+        
         ImFont *font = ImGui::GetFont();
         font->Scale = 15.f / font->FontSize;
-
+        
         CGFloat x = (([UIApplication sharedApplication].windows[0].rootViewController.view.frame.size.width) - 360) / 2;
         CGFloat y = (([UIApplication sharedApplication].windows[0].rootViewController.view.frame.size.height) - 300) / 2;
-
+        
         ImGui::SetNextWindowPos(ImVec2(x, y), ImGuiCond_FirstUseEver);
         ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiCond_FirstUseEver);
-
+        
         drawWelcome("Welcome to @@APPNAME@@ Mod Menu!", "Version: @@APPVERSION@@", "@@USER@@");
-
+        
         if (self.isMenuEnabled) {
             drawMenu(YES); // Draw the menu if it's enabled
         }
-
+        
         cheatHandle();
-
+        
         ImGui::Render();
         ImDrawData *draw_data = ImGui::GetDrawData();
         ImGui_ImplMetal_RenderDrawData(draw_data, commandBuffer, renderEncoder);
-
+        
         [renderEncoder popDebugGroup];
         [renderEncoder endEncoding];
-
+        
         [commandBuffer presentDrawable:view.currentDrawable];
     }
-
+    
     [commandBuffer commit];
 }
-
 
 - (void)mtkView:(MTKView *)view drawableSizeWillChange:(CGSize)size {
     // Handle drawable size change if needed
