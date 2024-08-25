@@ -87,23 +87,8 @@
 
 - (void)toggleMenuButtonTapped {
     self.isMenuEnabled = !self.isMenuEnabled; // Toggle the menu state
-    
-    if (self.isMenuEnabled) {
-        // Enable user interaction with the menu
-        [self.mtkView setUserInteractionEnabled:YES];
-    } else {
-        // Disable user interaction with the menu
-        [self.mtkView setUserInteractionEnabled:NO];
-    }
-    
-    // Always force redraw when the menu state changes
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.mtkView setNeedsDisplay];
-    });
+    [self.view setUserInteractionEnabled:YES]; // Ensure button remains interactive
 }
-
-
-
 
 + (void)showChange:(BOOL)open {
     // This method can be used to control menu visibility elsewhere if needed
@@ -152,94 +137,89 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if (self.isMenuEnabled) {
-        [self updateIOWithTouchEvent:event]; // Handle ImGui touch interaction
+    if (!self.isMenuEnabled) {
+        [super touchesBegan:touches withEvent:event]; // Pass touch events to the superclass (game interaction)
     } else {
-        [self.nextResponder touchesBegan:touches withEvent:event]; // Pass touch events to the next responder (game)
+        [self updateIOWithTouchEvent:event]; // Handle ImGui touch interaction
     }
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if (self.isMenuEnabled) {
-        [self updateIOWithTouchEvent:event]; // Handle ImGui touch interaction
+    if (!self.isMenuEnabled) {
+        [super touchesMoved:touches withEvent:event]; // Pass touch events to the superclass (game interaction)
     } else {
-        [self.nextResponder touchesMoved:touches withEvent:event]; // Pass touch events to the next responder (game)
-    }
-}
-
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if (self.isMenuEnabled) {
         [self updateIOWithTouchEvent:event]; // Handle ImGui touch interaction
-    } else {
-        [self.nextResponder touchesEnded:touches withEvent:event]; // Pass touch events to the next responder (game)
     }
 }
 
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if (self.isMenuEnabled) {
-        [self updateIOWithTouchEvent:event]; // Handle ImGui touch interaction
+    if (!self.isMenuEnabled) {
+        [super touchesCancelled:touches withEvent:event]; // Pass touch events to the superclass (game interaction)
     } else {
-        [self.nextResponder touchesCancelled:touches withEvent:event]; // Pass touch events to the next responder (game)
+        [self updateIOWithTouchEvent:event]; // Handle ImGui touch interaction
     }
 }
 
-
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if (!self.isMenuEnabled) {
+        [super touchesEnded:touches withEvent:event]; // Pass touch events to the superclass (game interaction)
+    } else {
+        [self updateIOWithTouchEvent:event]; // Handle ImGui touch interaction
+    }
+}
 
 #pragma mark - MTKViewDelegate
 
 - (void)drawInMTKView:(MTKView *)view {
-    if (!self.isMenuEnabled) return; // Skip drawing if the menu is not enabled
-
     ImGuiIO &io = ImGui::GetIO();
     io.DisplaySize.x = view.bounds.size.width;
     io.DisplaySize.y = view.bounds.size.height;
-
+    
     CGFloat framebufferScale = view.window.screen.scale ?: UIScreen.mainScreen.scale;
     io.DisplayFramebufferScale = ImVec2(framebufferScale, framebufferScale);
     io.DeltaTime = 1 / float(view.preferredFramesPerSecond ?: 120);
-
+    
     id<MTLCommandBuffer> commandBuffer = [self.commandQueue commandBuffer];
-
+    
     embraceTheDarkness(); // theme
-
+    
     MTLRenderPassDescriptor *renderPassDescriptor = view.currentRenderPassDescriptor;
     if (renderPassDescriptor != nil) {
         id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:renderPassDescriptor];
         [renderEncoder pushDebugGroup:@"ImGui Jane"];
-
+        
         ImGui_ImplMetal_NewFrame(renderPassDescriptor);
         ImGui::NewFrame();
-
+        
         ImFont *font = ImGui::GetFont();
         font->Scale = 15.f / font->FontSize;
-
+        
         CGFloat x = (([UIApplication sharedApplication].windows[0].rootViewController.view.frame.size.width) - 360) / 2;
         CGFloat y = (([UIApplication sharedApplication].windows[0].rootViewController.view.frame.size.height) - 300) / 2;
-
+        
         ImGui::SetNextWindowPos(ImVec2(x, y), ImGuiCond_FirstUseEver);
         ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiCond_FirstUseEver);
-
+        
         drawWelcome("Welcome to @@APPNAME@@ Mod Menu!", "Version: @@APPVERSION@@", "@@USER@@");
-
+        
         if (self.isMenuEnabled) {
             drawMenu(YES); // Draw the menu if it's enabled
         }
-
+        
         cheatHandle();
-
+        
         ImGui::Render();
         ImDrawData *draw_data = ImGui::GetDrawData();
         ImGui_ImplMetal_RenderDrawData(draw_data, commandBuffer, renderEncoder);
-
+        
         [renderEncoder popDebugGroup];
         [renderEncoder endEncoding];
-
+        
         [commandBuffer presentDrawable:view.currentDrawable];
     }
-
+    
     [commandBuffer commit];
 }
-
 
 - (void)mtkView:(MTKView *)view drawableSizeWillChange:(CGSize)size {
     // Handle drawable size change if needed
