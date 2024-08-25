@@ -124,14 +124,9 @@
     self.mtkView.device = self.device;
     self.mtkView.delegate = self;
     self.mtkView.clearColor = MTLClearColorMake(0, 0, 0, 0);
-    self.mtkView.backgroundColor = [UIColor clearColor];
-    self.mtkView.framebufferOnly = NO;
-    [self.view addSubview:self.mtkView];
-    
-    // Add toggleMenuButton above mtkView to ensure it's always on top
-    [self.view bringSubviewToFront:self.toggleMenuButton];
+    self.mtkView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+    self.mtkView.clipsToBounds = YES;
 }
-
 
 #pragma mark - Interaction
 
