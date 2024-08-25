@@ -86,7 +86,7 @@
 }
 
 - (void)toggleMenuButtonTapped {
-    self.isMenuEnabled = !self.isMenuEnabled; // Toggle the menu state
+    self.isMenuEnabled = !self.isMenuEnabled; // Toggle the menu state //
     if (self.isMenuEnabled) {
         // Enable user interaction with the menu
         [self.mtkView setUserInteractionEnabled:YES];
