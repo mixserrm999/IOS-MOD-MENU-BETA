@@ -87,13 +87,18 @@
 
 - (void)toggleMenuButtonTapped {
     self.isMenuEnabled = !self.isMenuEnabled; // Toggle the menu state
+    // Force the view to redraw to reflect the change
+    [self.mtkView setNeedsDisplay];
     
     if (self.isMenuEnabled) {
-        [self.view setUserInteractionEnabled:NO]; // Disable interaction with the game when the menu is enabled
+        // Disable user interaction with the game when menu is open
+        [self.mtkView setUserInteractionEnabled:YES];
     } else {
-        [self.view setUserInteractionEnabled:YES]; // Enable interaction with the game when the menu is disabled
+        // Enable user interaction with the game when menu is closed
+        [self.mtkView setUserInteractionEnabled:NO];
     }
 }
+
 
 
 + (void)showChange:(BOOL)open {
@@ -119,9 +124,14 @@
     self.mtkView.device = self.device;
     self.mtkView.delegate = self;
     self.mtkView.clearColor = MTLClearColorMake(0, 0, 0, 0);
-    self.mtkView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
-    self.mtkView.clipsToBounds = YES;
+    self.mtkView.backgroundColor = [UIColor clearColor];
+    self.mtkView.framebufferOnly = NO;
+    [self.view addSubview:self.mtkView];
+    
+    // Add toggleMenuButton above mtkView to ensure it's always on top
+    [self.view bringSubviewToFront:self.toggleMenuButton];
 }
+
 
 #pragma mark - Interaction
 
@@ -143,36 +153,37 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if (!self.isMenuEnabled) {
-        [super touchesBegan:touches withEvent:event]; // ส่งผ่านเหตุการณ์สัมผัสไปยังเกม
+    if (self.isMenuEnabled) {
+        [self updateIOWithTouchEvent:event]; // Handle ImGui touch interaction
     } else {
-        [self updateIOWithTouchEvent:event]; // ส่งผ่านเหตุการณ์สัมผัสไปยัง ImGui
+        [self.nextResponder touchesBegan:touches withEvent:event]; // Pass touch events to the next responder (game)
     }
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if (!self.isMenuEnabled) {
-        [super touchesMoved:touches withEvent:event]; // ส่งผ่านเหตุการณ์สัมผัสไปยังเกม
+    if (self.isMenuEnabled) {
+        [self updateIOWithTouchEvent:event]; // Handle ImGui touch interaction
     } else {
-        [self updateIOWithTouchEvent:event]; // ส่งผ่านเหตุการณ์สัมผัสไปยัง ImGui
-    }
-}
-
-- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if (!self.isMenuEnabled) {
-        [super touchesCancelled:touches withEvent:event]; // ส่งผ่านเหตุการณ์สัมผัสไปยังเกม
-    } else {
-        [self updateIOWithTouchEvent:event]; // ส่งผ่านเหตุการณ์สัมผัสไปยัง ImGui
+        [self.nextResponder touchesMoved:touches withEvent:event]; // Pass touch events to the next responder (game)
     }
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if (!self.isMenuEnabled) {
-        [super touchesEnded:touches withEvent:event]; // ส่งผ่านเหตุการณ์สัมผัสไปยังเกม
+    if (self.isMenuEnabled) {
+        [self updateIOWithTouchEvent:event]; // Handle ImGui touch interaction
     } else {
-        [self updateIOWithTouchEvent:event]; // ส่งผ่านเหตุการณ์สัมผัสไปยัง ImGui
+        [self.nextResponder touchesEnded:touches withEvent:event]; // Pass touch events to the next responder (game)
     }
 }
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if (self.isMenuEnabled) {
+        [self updateIOWithTouchEvent:event]; // Handle ImGui touch interaction
+    } else {
+        [self.nextResponder touchesCancelled:touches withEvent:event]; // Pass touch events to the next responder (game)
+    }
+}
+
 
 
 #pragma mark - MTKViewDelegate
