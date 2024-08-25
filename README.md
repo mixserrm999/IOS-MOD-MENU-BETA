@@ -17,6 +17,6 @@
 ![Menu Screenshot](path_to_your_image.png)
 
 ## CREDIT 
-- [batchh-mod-menu-template]([link_to_your_profile](https://iosgods.com/topic/182814-theos-batchh-mod-menu-template-162-il2cpp-imgui/))
+- [batchh-mod-menu-template](https://iosgods.com/topic/182814-theos-batchh-mod-menu-template-162-il2cpp-imgui/))
 - create by [ImGui](https://github.com/ocornut/imgui)
 
