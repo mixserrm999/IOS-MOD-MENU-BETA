@@ -4,7 +4,7 @@
 
 ## HOW TO USE
 - Use 3 finger gesture to close the mod menu icon -
-- Use 2 finger gesture like the mod menu icon -
+- Use 2 finger gesture show the mod menu icon -
 - Provide customized user interface (UI) -
 - Support multi-touch control
 
