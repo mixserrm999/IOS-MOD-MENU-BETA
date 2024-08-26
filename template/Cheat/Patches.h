@@ -22,7 +22,8 @@ void addNewPatch(uintptr_t offset, const char* hexPattern, bool* setting) {
 
 void initPatch() {
     //here init your patches
-    //addNewPatch(offset::test, "20008052C0035FD6", &test);
+    addNewPatch(offset::case0_func1, "007D8052C0035FD6", &case0_func1);
+    addNewPatch(offset::case0_func2, "0090241EC0035FD6", &case0_func2);
 
 }
 

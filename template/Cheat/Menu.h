@@ -174,7 +174,7 @@ void drawMenu(bool MenDeal)
         }
 
         ImGui::Spacing();
-        if (ImGui::Button("credit", ImVec2(100.0f, 40.0f)))
+        if (ImGui::Button("More", ImVec2(100.0f, 40.0f)))
         {
             tab = 1;
         }
@@ -202,8 +202,9 @@ void drawMenu(bool MenDeal)
             ImGui::SameLine();
             float batteryLevel = [UIDevice currentDevice].batteryLevel * 100;
             ImGui::Text("Battery Level: %.0f%%", batteryLevel);
-            settingsChanged |= ImGui::Checkbox("Test 1", &test);
-            settingsChanged |= ImGui::Checkbox("Test 2", &test2);
+
+            settingsChanged |= ImGui::Checkbox("AddDiamond", &case0_func1);
+            settingsChanged |= ImGui::Checkbox("AttackSpeed", &case0_func2);
 
             ImGui::EndChild();
             break;

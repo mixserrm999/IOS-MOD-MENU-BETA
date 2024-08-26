@@ -2,6 +2,13 @@
 #define HANDLE_H
 
 #include "Patches.h"
+void (*orig_RpcAttack)(void *self, bool attacking, Sfx attackSound, Vector3 pos);
+
+void my_RpcAttack(void *self, bool attacking, Sfx attackSound, Vector3 pos) {
+    // ป้องกันไม่ให้ตัวละครถูกโจมตี
+    attacking = false;
+    orig_RpcAttack(self, attacking, attackSound, pos);
+}
 
 void cheatHandle() {
     for (auto& patch_info : patch_infos) {
@@ -23,6 +30,7 @@ void cheatHandle() {
 
         //use DobbyHook, same kind of MSHookFunction but working on JIT, Dopamine!
         //HOOK_DOPA(offset, update, orig_Update);
+        DobbyHook((void*)0xF31924, (void*)my_RpcAttack, (void**)&orig_RpcAttack);
 
         //normal MSHook
         //HOOK(offset, update, orig_Update);
