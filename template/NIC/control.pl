@@ -1,5 +1,3 @@
-NIC->prompt("PROJECT_NAME", "Enter the project name", {default => "SERMIX"});
-
 NIC->prompt("BINARYNAME", "Enter binary name of the app (if you know it)", {default => ""});
 
 NIC->prompt("APPNAME", "Enter name of the app", {default => "SERMIX"});
