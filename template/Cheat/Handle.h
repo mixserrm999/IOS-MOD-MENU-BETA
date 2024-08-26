@@ -1,18 +1,13 @@
 #ifndef HANDLE_H
 #define HANDLE_H
 
-class Sfx;       // Forward declaration for Sfx
-class Vector3;   // Forward declaration for Vector3
-
 #include "Patches.h"
-void (*orig_RpcAttack)(void *self, bool attacking, Sfx attackSound, Vector3 pos);
-
-void my_RpcAttack(void *self, bool attacking, Sfx attackSound, Vector3 pos) {
+void (*orig_RpcAttack)(void *self, bool attacking);
+void my_RpcAttack(void *self, bool attacking) {
     // ป้องกันไม่ให้ตัวละครถูกโจมตี
     attacking = false;
-    orig_RpcAttack(self, attacking, attackSound, pos);
+    orig_RpcAttack(self, attacking);
 }
-
 void cheatHandle() {
     for (auto& patch_info : patch_infos) {
         // Check if the setting is enabled
