@@ -1,6 +1,9 @@
 #ifndef HANDLE_H
 #define HANDLE_H
 
+class Sfx;       // Forward declaration for Sfx
+class Vector3;   // Forward declaration for Vector3
+
 #include "Patches.h"
 void (*orig_RpcAttack)(void *self, bool attacking, Sfx attackSound, Vector3 pos);
 
